@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore,collection,addDoc,query,getDocs,deleteDoc,doc} from "firebase/firestore";
+import { getFirestore,collection,addDoc,query,getDocs,deleteDoc,doc,updateDoc} from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -51,4 +51,18 @@ return data
 async function DeleteItem(index){
     await deleteDoc(doc(db, "Todo", index));
 }
-export {add,get,DeleteItem}
+
+
+
+// ================ Upate Doc ================================
+async function UpdateDoc(value,id){
+    alert(value+'   '+id);
+    
+    const washingtonRef = doc(db, `/Todo/${id}`);
+
+   
+    await updateDoc(washingtonRef, {
+      name: value
+    });
+}
+export {add,get,DeleteItem,UpdateDoc}
