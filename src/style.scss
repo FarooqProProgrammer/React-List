@@ -1,3 +1,19 @@
+@mixin mobile {
+    @media screen and (max-width:480px) {
+        @content   
+    }
+}
+@mixin tablet {
+    @media screen and (max-width:768px) {
+        @content   
+    }
+}
+@mixin laptop {
+    @media screen and (max-width:1200px) {
+        @content   
+    }
+}
+
 .formContainer {
     background-color: #a7bcff;
     height: 100vh;
@@ -16,6 +32,7 @@
             color: #5d5b8d;
             font-weight: bold;
             font-size: 24px;
+           
         }
         .title {
             color: #5d5b8d;
@@ -89,6 +106,9 @@
             color: #ddddf7;
             .logo {
                 font-weight: bold;
+                @include tablet{
+                    display: none;
+                }
             }
             .user {
                 display: flex;
