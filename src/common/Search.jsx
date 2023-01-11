@@ -30,21 +30,31 @@ const Search = () => {
       
 
       try{
-        const res = await getDocs(db,"chats",combineId);
+        const res = await getDoc(db,"chats",combineId);
         if(!res.exist()){
           // create chat 
-          await setDoc(doc,(db,"chats",combineId),{})
+          await setDoc(doc,(db,"chats",combineId),{messages:[]})
 
 
-          //  create user chat 
-          await updateDoc(doc(db,"userChats",currentUser.uid),{
-            [combineId+".userInfo"]:{
-              uid:user.uid,
-              displayName:user.displayName,
-              photoURL:user.photoURL
+          await updateDoc(doc(db, "userChats", currentUser.uid), {
+            [combineId + ".userInfo"]: {
+              uid: user.uid,
+              displayName: user.displayName,
+              photoURL: user.photoURL,
             },
-            [combineId+".data"]
-          })
+            [combineId + ".date"]: serverTimestamp(),
+          });
+          
+          await updateDoc(doc(db, "userChats", user.uid), {
+            [combineId + ".userInfo"]: {
+              uid: currentUser.uid,
+              displayName: currentUser.displayName,
+              photoURL: currentUser.photoURL,
+            },
+            [combineId + ".date"]: serverTimestamp(),
+          });
+
+
         }
       }catch(e){
 
