@@ -8,9 +8,9 @@ import Home from './pages/Home'
 const App = () => {
   return (
     <div>
-      {/* <Register/> */}
+      <Register/>
       {/* <Login/> */}
-      <Home/>
+      {/* <Home/> */}
     </div>
   )
 }
